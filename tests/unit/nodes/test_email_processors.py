@@ -1,5 +1,5 @@
 # type: ignore
-"""Unit tests for basic LangGraph nodes.
+"""Unit tests for email processor nodes.
 
 These tests verify that our basic nodes follow LangGraph principles:
 1. Pure functions (deterministic output for given input)
@@ -12,7 +12,7 @@ from datetime import datetime
 from unittest.mock import patch
 
 from email_assistant.models.state import create_initial_state
-from email_assistant.nodes.basic_nodes import (
+from email_assistant.nodes.email_processors import (
     add_greeting_node,
     add_signature_node,
     format_subject_node,
@@ -176,7 +176,7 @@ class TestAddGreetingNode:
 class TestAddSignatureNode:
     """Test the add_signature_node function."""
 
-    @patch("email_assistant.nodes.basic_nodes.datetime")
+    @patch("email_assistant.nodes.email_processors.datetime")
     def test_business_signature(self, mock_datetime):
         """Test business email signature format."""
         mock_datetime.now.return_value.strftime.return_value = "2024-01-15"

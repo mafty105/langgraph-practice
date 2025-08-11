@@ -9,7 +9,7 @@ LangGraph Node Concepts:
 - Nodes can be composed into graphs for complex workflows
 """
 
-from email_assistant.nodes.basic_nodes import (
+from email_assistant.nodes.email_processors import (
     add_greeting_node,
     add_signature_node,
     format_subject_node,
