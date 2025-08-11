@@ -18,6 +18,13 @@ This is an Email Assistant CLI application built with LangGraph, designed as a l
 - **Current Step**: Not started (ready to begin Step 1)
 - **Environment**: Python 3.11 with LangGraph 0.6.4 installed
 
+### User Preferences (MUST FOLLOW)
+- **Git Workflow**: See `WORKFLOW.md` and `USER_PREFERENCES.md` for detailed rules
+- **Single PR Policy**: All related work in ONE PR, even multi-step implementations
+- **NEVER merge PRs**: User always handles merging
+- **NEVER commit to main**: Always use feature branches
+- **Branch cleanup**: Delete branches after merge
+
 ## Development Commands
 
 ### Environment Setup
