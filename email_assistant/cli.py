@@ -245,5 +245,113 @@ def node_demo() -> None:
     )
 
 
+@app.command()
+def graph_demo() -> None:
+    """
+    Demonstrate LangGraph linear flow execution.
+
+    This command shows how LangGraph connects nodes into a workflow:
+    1. Creates a StateGraph with connected nodes
+    2. Executes the graph with initial state
+    3. Shows state transformations at each step
+    4. Demonstrates streaming execution
+
+    This is Step 3 of our learning journey!
+    """
+    console.print("\n[bold cyan]LangGraph Linear Flow Demo[/bold cyan]\n")
+    console.print("This demo shows how LangGraph orchestrates node execution.")
+    console.print("We'll connect our nodes into a linear workflow.\n")
+
+    # Import here to show we're using LangGraph
+    from email_assistant.graphs.simple_graph import (  # type: ignore
+        stream_simple_email_graph,
+    )
+
+    # Create initial state
+    console.print("[yellow]Creating initial state...[/yellow]")
+    initial_state = create_initial_state(
+        subject="Meeting Tomorrow",
+        body="Let's discuss the project status and next steps.",
+        recipient="team.lead@company.com",
+        email_type="business",
+    )
+
+    console.print(
+        Panel(
+            format_state_display(initial_state),
+            title="Initial State",
+            border_style="dim",
+        )
+    )
+
+    # Show graph structure
+    console.print("\n[yellow]Graph Structure:[/yellow]")
+    console.print("START → format_subject → add_greeting → add_signature")
+    console.print("      → validate_email → word_count → END\n")
+
+    # Stream execution to show each step
+    console.print("[yellow]Streaming graph execution...[/yellow]")
+    console.print("Watch how state transforms at each node:\n")
+
+    # Track state changes
+    current_state = dict(initial_state)
+
+    # Stream the graph execution
+    for update in stream_simple_email_graph(initial_state):
+        for node_name, state_updates in update.items():
+            console.print(f"[green]→ Node: {node_name}[/green]")
+
+            # Show what changed
+            if isinstance(state_updates, dict):
+                for key, value in state_updates.items():
+                    if key in ["subject", "body"]:
+                        # Truncate long values for display
+                        display_value = (
+                            str(value)[:100] + "..." if len(str(value)) > 100 else value
+                        )
+                        console.print(f"  Updated [cyan]{key}[/cyan]: {display_value}")
+                    elif key == "metadata":
+                        if "validation" in value:
+                            val_pass = value["validation"].get("validation_passed")
+                            console.print(f"  Added validation: {val_pass}")
+                        if "statistics" in value:
+                            stats = value["statistics"]
+                            total = stats.get("total_word_count", 0)
+                            console.print(f"  Word count: {total} words")
+
+                # Update our tracking state
+                current_state = {**current_state, **state_updates}
+
+            console.print()
+
+    # Show final state
+    console.print(
+        Panel(
+            format_state_display(create_initial_state(**current_state)),  # type: ignore
+            title="Final State",
+            border_style="green",
+        )
+    )
+
+    # Show key concepts
+    console.print("\n[bold green]✓ Graph Demo Complete![/bold green]")
+    console.print("\n[dim]Key LangGraph Concepts:[/dim]")
+
+    table = Table(show_header=False, box=None)
+    table.add_column(style="cyan", no_wrap=True)
+    table.add_column()
+
+    table.add_row("1.", "StateGraph manages the workflow")
+    table.add_row("2.", "Nodes are connected with edges")
+    table.add_row("3.", "State flows through nodes in sequence")
+    table.add_row("4.", "Each node transforms state independently")
+    table.add_row("5.", "Graph compilation creates executable workflow")
+
+    console.print(table)
+    console.print(
+        "\n[dim]Next: Step 4 will add conditional edges for branching logic![/dim]\n"
+    )
+
+
 if __name__ == "__main__":
     app()
