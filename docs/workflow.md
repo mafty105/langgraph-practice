@@ -56,3 +56,30 @@ When I ask you to implement something with multiple steps:
 - Make incremental commits but push to the same PR
 - Update the PR description as you complete steps
 - Only create a new PR if working on completely unrelated features
+
+## Critical Git Rules
+
+### NEVER Do These
+1. **NEVER commit directly to main** - Always use feature branches
+2. **NEVER merge PRs** - The user always handles merging
+3. **NEVER reuse branch names** - Each branch should be unique
+4. **NEVER leave branches after merge** - Clean up immediately
+
+### ALWAYS Do These
+1. **ALWAYS create a feature branch** for any changes
+2. **ALWAYS use descriptive branch names** (feature/, fix/, docs/, etc.)
+3. **ALWAYS delete branches after they're merged**
+4. **ALWAYS close duplicate PRs immediately**
+5. **ALWAYS wait for user to merge PRs**
+
+## Branch Naming Convention
+
+Use prefixes to indicate the type of change:
+- `feature/` - New features or enhancements
+- `fix/` - Bug fixes
+- `docs/` - Documentation updates
+- `refactor/` - Code refactoring
+- `test/` - Test additions or updates
+- `chore/` - Maintenance tasks
+
+Example: `feature/add-email-parser`, `fix/memory-leak`, `docs/update-readme`

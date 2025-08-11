@@ -18,6 +18,14 @@ This is an Email Assistant CLI application built with LangGraph, designed as a l
 - **Current Step**: Not started (ready to begin Step 1)
 - **Environment**: Python 3.11 with LangGraph 0.6.4 installed
 
+### User Preferences (MUST FOLLOW)
+- **Git Workflow**: See [`docs/workflow.md`](docs/workflow.md) for detailed rules
+- **User Preferences**: See [`docs/user-preferences.md`](docs/user-preferences.md) for all preferences
+- **Single PR Policy**: All related work in ONE PR, even multi-step implementations
+- **NEVER merge PRs**: User always handles merging
+- **NEVER commit to main**: Always use feature branches
+- **Branch cleanup**: Delete branches after merge
+
 ## Development Commands
 
 ### Environment Setup
@@ -144,8 +152,22 @@ def my_node(state: EmailState) -> EmailState:
 - Connect with edges or conditional edges
 - Compile before execution
 
+## Documentation
+
+### Project Documentation
+- [`docs/learning-langgraph-step-by-step.md`](docs/learning-langgraph-step-by-step.md) - Step-by-step learning guide
+- [`docs/user-preferences.md`](docs/user-preferences.md) - User preferences and rules
+- [`docs/workflow.md`](docs/workflow.md) - Git workflow and PR guidelines
+- [`docs/requirements.md`](docs/requirements.md) - Project requirements
+- [`docs/technology-stack-documentation.md`](docs/technology-stack-documentation.md) - Technology stack details
+
+### Key Documentation Points
+- Always follow the step-by-step guide for implementations
+- Refer to user preferences before making any Git operations
+- Check workflow documentation for PR and branch management
+
 ## Technology Stack Reference
-- See `docs/technology-stack-documentation.md` for full stack details
+- See [`docs/technology-stack-documentation.md`](docs/technology-stack-documentation.md) for full stack details
 - Key libraries: LangGraph, LangChain, Typer, Pydantic, Rich
 
 ## Questions or Issues?
