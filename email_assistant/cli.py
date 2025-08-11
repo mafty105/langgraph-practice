@@ -325,9 +325,21 @@ def graph_demo() -> None:
             console.print()
 
     # Show final state
+    # Simply cast to EmailState for display
+    from email_assistant.models.state import EmailState
+
+    final_state = EmailState(
+        subject=current_state.get("subject", ""),  # type: ignore
+        body=current_state.get("body", ""),  # type: ignore
+        recipient=current_state.get("recipient", ""),  # type: ignore
+        email_type=current_state.get("email_type", "other"),  # type: ignore
+        created_at=current_state.get("created_at"),  # type: ignore
+        modified_at=current_state.get("modified_at"),  # type: ignore
+        metadata=current_state.get("metadata"),  # type: ignore
+    )
     console.print(
         Panel(
-            format_state_display(create_initial_state(**current_state)),  # type: ignore
+            format_state_display(final_state),
             title="Final State",
             border_style="green",
         )
